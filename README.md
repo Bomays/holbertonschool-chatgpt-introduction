@@ -1,6 +1,7 @@
 # holbertonschool-chatgpt-introduction
 # Enhancing Code Quality and Efficiency with ChatGPT
-![Open AI logo](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/512px-OpenAI_Logo.svg.png)
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/512px-OpenAI_Logo.svg.png" alt="Open AI Logo" width="230"/>
 
 ## 0. Debugging - Python Factorial
 
@@ -155,7 +156,7 @@ ________________________________________________________
 
 ## 3. Debugging - Python Mines
 
-Fix the code, implement a mechanism to detect when all non-mine cells have been revealed, thus winning the game
+> Fix the code, implement a mechanism to detect when all non-mine cells have been revealed, thus winning the game
 
 ### original code:
 
@@ -340,7 +341,7 @@ _____________________________________________________________
 
 ## 4. Documentation - Python Factorial
 
-Add the comments to this code. You should have 3 sections: function description, parameters and returns
+> Add the comments to this code. You should have 3 sections: function description, parameters and returns
 
 ### Original code:
 
@@ -398,7 +399,7 @@ ______________________________________________________________
 
 ## 5. Error Handling - Python Checkbook
 
-Fix the code, to prevent the program from crashing due to invalid input (e.g., non-numeric values), add error handling mechanisms
+> Fix the code, to prevent the program from crashing due to invalid input (e.g., non-numeric values), add error handling mechanisms
 
 
 ### Original code:
@@ -517,3 +518,260 @@ Explanation:
 
 ### Benefits:
 - The program now handles invalid inputs gracefully without crashing, providing feedback to the user and allowing them to try again.
+
+______________________________________________________________
+
+## 6. Debugging - Tic Tac Toe Python
+
+> Test all the user inputs !
+
+### Original code:
+
+#!/usr/bin/python3
+
+def print_board(board):
+    for row in board:
+        print(" | ".join(row))
+        print("-" * 5)
+
+def check_winner(board):
+    for row in board:
+        if row.count(row[0]) == len(row) and row[0] != " ":
+            return True
+
+    for col in range(len(board[0])):
+        if board[0][col] == board[1][col] == board[2][col] and board[0][col] != " ":
+            return True
+
+    if board[0][0] == board[1][1] == board[2][2] and board[0][0] != " ":
+        return True
+
+    if board[0][2] == board[1][1] == board[2][0] and board[0][2] != " ":
+        return True
+
+    return False
+
+def tic_tac_toe():
+    board = [[" "]*3 for _ in range(3)]
+    player = "X"
+    while not check_winner(board):
+        print_board(board)
+        row = int(input("Enter row (0, 1, or 2) for player " + player + ": "))
+        col = int(input("Enter column (0, 1, or 2) for player " + player + ": "))
+        if board[row][col] == " ":
+            board[row][col] = player
+            if player == "X":
+                player = "O"
+            else:
+                player = "X"
+        else:
+            print("That spot is already taken! Try again.")
+
+    print_board(board)
+    print("Player " + player + " wins!")
+
+tic_tac_toe()
+
+
+
+
+### Corrected code:
+
+### Incorrect Winner Announcement:
+
+Problem: The winner is announced incorrectly because the player variable switches before the game ends.
+
+Explanation: After a player makes a winning move, the player variable switches to the next player before the winner is announced. This results in the wrong player being announced as the winner.
+
+Solution: Adjust the winner announcement to use the correct player.
+
+
+### Incorrect Board Display:
+
+Problem: The line separating rows in the board display (print("-" * 5)) is too short.
+
+Explanation: The separation line should be longer to match the width of the Tic-Tac-Toe grid.
+
+Solution: Make the separation line longer.
+Winner Check Placement:
+
+
+Problem: The game continues even after a player wins, and the message "Player wins!" isn't displayed immediately.
+
+Explanation: The winner check should occur immediately after a player makes a move. If a winner is found, the game should end.
+
+Solution: Move the winner check right after a move is made.
+
+
+
+#!/usr/bin/python3
+
+def print_board(board):
+    """Prints the current state of the Tic-Tac-Toe board."""
+    for row in board:
+        print(" | ".join(row))
+        print("-" * 11)  # Adjusted line length to fit the board
+
+def check_winner(board):
+    """Checks if there's a winner on the board."""
+    # Check rows
+    for row in board:
+        if row.count(row[0]) == len(row) and row[0] != " ":
+            return True
+
+    # Check columns
+    for col in range(len(board[0])):
+        if board[0][col] == board[1][col] == board[2][col] and board[0][col] != " ":
+            return True
+
+    # Check diagonals
+    if board[0][0] == board[1][1] == board[2][2] and board[0][0] != " ":
+        return True
+    if board[0][2] == board[1][1] == board[2][0] and board[0][2] != " ":
+        return True
+
+    return False
+
+def tic_tac_toe():
+    """Runs the Tic-Tac-Toe game."""
+    board = [[" "]*3 for _ in range(3)]
+    player = "X"
+    while True:
+        print_board(board)
+        row = int(input("Enter row (0, 1, or 2) for player " + player + ": "))
+        col = int(input("Enter column (0, 1, or 2) for player " + player + ": "))
+        if board[row][col] == " ":
+            board[row][col] = player
+            if check_winner(board):
+                print_board(board)
+                print("Player " + player + " wins!")
+                return  # End the game after a win
+            player = "O" if player == "X" else "X"  # Switch player
+        else:
+            print("That spot is already taken! Try again.")
+
+if __name__ == "__main__":
+    tic_tac_toe()
+
+
+Explanation:
+
+Board Display Fix:
+
+The line separating rows in the board ("-" * 5) was too short.
+Fix: Changed to "-" * 11 to match the board width when printing it.
+Winner Check and Announcement:
+
+The winner was announced incorrectly because the player variable switched before checking for a winner.
+Fix: Moved the winner check immediately after the player's move. If a win is detected, the game ends (return), and the correct player is announced as the winner.
+Game Flow:
+
+The game now correctly checks for a winner after each move and immediately ends if a winner is found.
+Summary:
+The game now functions correctly, displaying the Tic-Tac-Toe board properly, correctly announcing the winner, and ending the game when a win condition is met.
+
+
+
+### Testing game:
+
+```/holbertonschool-chatgpt-introduction/debugging# ./tic.py 
+  |   |  
+-----------
+  |   |  
+-----------
+  |   |  
+-----------
+Enter row (0, 1, or 2) for player X: 0
+Enter column (0, 1, or 2) for player X: 1
+  | X |  
+-----------
+  |   |  
+-----------
+  |   |  
+-----------
+Enter row (0, 1, or 2) for player O: 1
+Enter column (0, 1, or 2) for player O: 1
+  | X |  
+-----------
+  | O |  
+-----------
+  |   |  
+-----------
+Enter row (0, 1, or 2) for player X: 0 
+Enter column (0, 1, or 2) for player X: 0
+X | X |  
+-----------
+  | O |  
+-----------
+  |   |  
+-----------
+Enter row (0, 1, or 2) for player O: 2
+Enter column (0, 1, or 2) for player O: 2
+X | X |  
+-----------
+  | O |  
+-----------
+  |   | O
+-----------
+Enter row (0, 1, or 2) for player X: 0
+Enter column (0, 1, or 2) for player X: 0
+That spot is already taken! Try again.
+X | X |  
+-----------
+  | O |  
+-----------
+  |   | O
+-----------
+Enter row (0, 1, or 2) for player X: 1
+Enter column (0, 1, or 2) for player X: 0
+X | X |  
+-----------
+X | O |  
+-----------
+  |   | O
+-----------
+Enter row (0, 1, or 2) for player O: 2
+Enter column (0, 1, or 2) for player O: 0
+X | X |  
+-----------
+X | O |  
+-----------
+O |   | O
+-----------
+Enter row (0, 1, or 2) for player X: 2
+Enter column (0, 1, or 2) for player X: 1
+X | X |  
+-----------
+X | O |  
+-----------
+O | X | O
+-----------
+Enter row (0, 1, or 2) for player O: 1
+Enter column (0, 1, or 2) for player O: 1
+That spot is already taken! Try again.
+X | X |  
+-----------
+X | O |  
+-----------
+O | X | O
+-----------
+Enter row (0, 1, or 2) for player O: 1
+Enter column (0, 1, or 2) for player O: 2
+X | X |  
+-----------
+X | O | O
+-----------
+O | X | O
+-----------
+Enter row (0, 1, or 2) for player X: 0
+Enter column (0, 1, or 2) for player X: 2
+X | X | X
+-----------
+X | O | O
+-----------
+O | X | O
+-----------
+Player X wins!
+
+
+
