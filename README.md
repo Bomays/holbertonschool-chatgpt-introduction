@@ -445,7 +445,7 @@ if __name__ == "__main__":
     main()
 
 
-## Corrected code:
+### Corrected code:
 
 To prevent the program from crashing due to invalid input, such as non-numeric values when the user is prompted for amounts, you can add error handling using `try` and `except` blocks. This will allow the program to catch exceptions like `ValueError` and prompt the user to enter a valid input.
 
