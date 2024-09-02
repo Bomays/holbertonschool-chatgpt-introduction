@@ -146,7 +146,9 @@ You should make sure that the ID used in the JavaScript matches the ID used in t
 
 > [!NOTE]
 > Editor used to test the code : https://onecompiler.com/ 
-![One Compiler Logo](https://avatars.githubusercontent.com/u/50039608?s=200&v=4)
+
+<img src="https://avatars.githubusercontent.com/u/50039608?s=200&v=4" alt="One Compiler Logo" width="72"/>
+
 
 
 ________________________________________________________
@@ -391,3 +393,127 @@ Function Description: The factorial function calculates the factorial of a given
 Parameters: It takes one parameter, n, which is the number for which you want to calculate the factorial.
 
 Returns: The function returns the factorial of the number n. If n is 0, it returns 1, because by definition, 0! (factorial of 0) is 1.
+
+______________________________________________________________
+
+## 5. Error Handling - Python Checkbook
+
+Fix the code, to prevent the program from crashing due to invalid input (e.g., non-numeric values), add error handling mechanisms
+
+
+### Original code:
+
+
+class Checkbook:
+    def __init__(self):
+        self.balance = 0.0
+
+    def deposit(self, amount):
+        self.balance += amount
+        print("Deposited ${:.2f}".format(amount))
+        print("Current Balance: ${:.2f}".format(self.balance))
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Insufficient funds to complete the withdrawal.")
+        else:
+            self.balance -= amount
+            print("Withdrew ${:.2f}".format(amount))
+            print("Current Balance: ${:.2f}".format(self.balance))
+
+    def get_balance(self):
+        print("Current Balance: ${:.2f}".format(self.balance))
+
+def main():
+    cb = Checkbook()
+    while True:
+        action = input("What would you like to do? (deposit, withdraw, balance, exit): ")
+        if action.lower() == 'exit':
+            break
+        elif action.lower() == 'deposit':
+            amount = float(input("Enter the amount to deposit: $"))
+            cb.deposit(amount)
+        elif action.lower() == 'withdraw':
+            amount = float(input("Enter the amount to withdraw: $"))
+            cb.withdraw(amount)
+        elif action.lower() == 'balance':
+            cb.get_balance()
+        else:
+            print("Invalid command. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
+
+## Corrected code:
+
+To prevent the program from crashing due to invalid input, such as non-numeric values when the user is prompted for amounts, you can add error handling using `try` and `except` blocks. This will allow the program to catch exceptions like `ValueError` and prompt the user to enter a valid input.
+
+
+
+```python
+class Checkbook:
+    def __init__(self):
+        self.balance = 0.0
+
+    def deposit(self, amount):
+        self.balance += amount
+        print("Deposited ${:.2f}".format(amount))
+        print("Current Balance: ${:.2f}".format(self.balance))
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Insufficient funds to complete the withdrawal.")
+        else:
+            self.balance -= amount
+            print("Withdrew ${:.2f}".format(amount))
+            print("Current Balance: ${:.2f}".format(self.balance))
+
+    def get_balance(self):
+        print("Current Balance: ${:.2f}".format(self.balance))
+
+def main():
+    cb = Checkbook()
+    while True:
+        action = input("What would you like to do? (deposit, withdraw, balance, exit): ").lower()
+        if action == 'exit':
+            break
+        elif action == 'deposit':
+            try:
+                amount = float(input("Enter the amount to deposit: $"))
+                if amount < 0:
+                    print("Please enter a positive amount.")
+                else:
+                    cb.deposit(amount)
+            except ValueError:
+                print("Invalid input. Please enter a numeric value.")
+        elif action == 'withdraw':
+            try:
+                amount = float(input("Enter the amount to withdraw: $"))
+                if amount < 0:
+                    print("Please enter a positive amount.")
+                else:
+                    cb.withdraw(amount)
+            except ValueError:
+                print("Invalid input. Please enter a numeric value.")
+        elif action == 'balance':
+            cb.get_balance()
+        else:
+            print("Invalid command. Please try again.")
+
+if __name__ == "__main__":
+    main()
+```
+
+Explanation:
+
+1. **Error Handling for Deposits and Withdrawals**:
+   - A `try` block is used to attempt converting the user input to a `float`.
+   - If the input is not a valid numeric value, a `ValueError` is caught, and an error message is displayed.
+   - Additionally, there is a check to ensure the amount is positive. If the user inputs a negative number, the program prompts for a positive amount.
+
+2. **Input Command Handling**:
+   - The user’s action input is converted to lowercase with `.lower()` to ensure that the input is case-insensitive.
+
+### Benefits:
+- The program now handles invalid inputs gracefully without crashing, providing feedback to the user and allowing them to try again.
