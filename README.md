@@ -9,6 +9,7 @@
 
 ### Original code :
 
+```
 #!/usr/bin/python3
 import sys
 
@@ -20,12 +21,13 @@ def factorial(n):
 
 f = factorial(int(sys.argv[1]))
 print(f)
-
+```
 
 The code has a logical issue in the factorial function. The while loop is infinite because the value of n is not being decremented within the loop, so n will never reach 1, and the loop will run indefinitely.
 
 ### Corrected code:
 
+```
 #!/usr/bin/python3
 import sys
 
@@ -38,7 +40,7 @@ def factorial(n):
 
 f = factorial(int(sys.argv[1]))
 print(f)
-
+```
 
 Explanation:
 
@@ -52,6 +54,7 @@ ________________________________________________________
 
 ### Original code :
 
+```
  cat factorial.py
 #!/usr/bin/python3
 import sys
@@ -64,7 +67,7 @@ def factorial(n):
 
 f = factorial(int(sys.argv[1]))
 print(f)
-
+```
 
 The error occurs because the code enters an infinite loop when you run the script. The KeyboardInterrupt exception (^C) indicates that you manually stopped the execution because the program was stuck.
 
@@ -72,6 +75,7 @@ The issue is with the while loop in the factorial function. The value of n is no
 
 ### Corrected code:
 
+```
 #!/usr/bin/python3
 import sys
 
@@ -84,7 +88,7 @@ def factorial(n):
 
 f = factorial(int(sys.argv[1]))
 print(f)
-
+```
 
 Explanation:
 
@@ -98,6 +102,7 @@ ________________________________________________________
 
 ### Original code: 
 
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,6 +143,7 @@ ________________________________________________________
 
 </body>
 </html>
+```
 
 The code provided is almost correct, but there's a small typo that will prevent the script from working as expected. Specifically, the id of the button in the HTML and the JavaScript code do not match.
 
@@ -160,6 +166,7 @@ ________________________________________________________
 
 ### original code:
 
+```
 #!/usr/bin/python3
 import random
 import os
@@ -229,7 +236,7 @@ class Minesweeper:
 if __name__ == "__main__":
     game = Minesweeper()
     game.play()
-
+```
 
 
 ### Corrected code:
@@ -243,7 +250,7 @@ B. **Update the `play` method**: Incorporate a call to this win-checking method 
 
 Here’s the updated code with these enhancements:
 
-```python
+```
 #!/usr/bin/python3
 import random
 import os
@@ -345,6 +352,7 @@ _____________________________________________________________
 
 ### Original code:
 
+```
 #!/usr/bin/python3
 import sys
 
@@ -357,10 +365,12 @@ def factorial(n):
 f = factorial(int(sys.argv[1]))
 print(f)
 
+```
 
 
 ### Corrected code:
 
+```
 #!/usr/bin/python3
 import sys
 
@@ -386,6 +396,7 @@ f = factorial(int(sys.argv[1]))
 
 //Print the calculated factorial
 print(f)
+```
 
 Explanation:
 
@@ -404,7 +415,7 @@ ______________________________________________________________
 
 ### Original code:
 
-
+```
 class Checkbook:
     def __init__(self):
         self.balance = 0.0
@@ -444,7 +455,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 
 ### Corrected code:
 
@@ -452,7 +463,7 @@ To prevent the program from crashing due to invalid input, such as non-numeric v
 
 
 
-```python
+```
 class Checkbook:
     def __init__(self):
         self.balance = 0.0
@@ -527,6 +538,7 @@ ______________________________________________________________
 
 ### Original code:
 
+```
 #!/usr/bin/python3
 
 def print_board(board):
@@ -571,7 +583,7 @@ def tic_tac_toe():
     print("Player " + player + " wins!")
 
 tic_tac_toe()
-
+```
 
 
 
@@ -603,14 +615,13 @@ Explanation: The winner check should occur immediately after a player makes a mo
 Solution: Move the winner check right after a move is made.
 
 
-
+```
 #!/usr/bin/python3
-
 def print_board(board):
     """Prints the current state of the Tic-Tac-Toe board."""
     for row in board:
         print(" | ".join(row))
-        print("-" * 11)  # Adjusted line length to fit the board
+        print("-" * 11)  
 
 def check_winner(board):
     """Checks if there's a winner on the board."""
@@ -630,8 +641,8 @@ def check_winner(board):
     if board[0][2] == board[1][1] == board[2][0] and board[0][2] != " ":
         return True
 
-    return False
-
+    return False  
+ 
 def tic_tac_toe():
     """Runs the Tic-Tac-Toe game."""
     board = [[" "]*3 for _ in range(3)]
@@ -646,13 +657,13 @@ def tic_tac_toe():
                 print_board(board)
                 print("Player " + player + " wins!")
                 return  # End the game after a win
-            player = "O" if player == "X" else "X"  # Switch player
+            player = "O" if player == "X" else "X" 
         else:
             print("That spot is already taken! Try again.")
 
 if __name__ == "__main__":
     tic_tac_toe()
-
+```
 
 Explanation:
 
